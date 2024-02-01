@@ -31,7 +31,11 @@ public sealed partial class SecondPage : Page
                             new TextBlock()
                                 .Text(() => vm.EmailLabel)
                                 .HorizontalAlignment(HorizontalAlignment.Left)
-                                .VerticalAlignment(VerticalAlignment.Center)
+                                .VerticalAlignment(VerticalAlignment.Center),
+                            new Button()
+                                .Content("Confirm registration")
+                                .AutomationProperties(automationId: "RegistrationButton")
+                                .Command(() => vm.ShowDialog)
                         )
                 )
             )
