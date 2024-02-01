@@ -11,7 +11,7 @@ public partial record SecondModel(Entity Entity, INavigator Navigator)
 
     public string EmailLabel => $"Your email: {Entity.Email}";
 
-    public Task ShowDialog()
+    public Task FinishRegistration()
     {
         return Navigator.ShowMessageDialogAsync(this, title: "Registration confirmed", content: "Your registration has been confirmed, tickets on the way.");
     }

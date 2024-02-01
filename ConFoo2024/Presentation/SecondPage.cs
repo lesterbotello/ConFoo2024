@@ -35,7 +35,7 @@ public sealed partial class SecondPage : Page
                             new Button()
                                 .Content("Confirm registration")
                                 .AutomationProperties(automationId: "RegistrationButton")
-                                .Command(() => vm.ShowDialog)
+                                .Command(() => vm.FinishRegistration)
                         )
                 )
             )
