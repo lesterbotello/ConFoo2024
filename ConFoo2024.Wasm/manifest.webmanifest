@@ -1,0 +1,10 @@
+{
+  "background_color": "#ffffff",
+  "description": "ConFoo2024",
+  "display": "standalone",
+  "name": "ConFoo2024",
+  "short_name": "ConFoo2024",
+  "start_url": "/index.html",
+  "theme_color": "#ffffff",
+  "scope": "/"
+}

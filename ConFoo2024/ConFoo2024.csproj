@@ -1,0 +1,65 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>$(DotNetVersion);$(DotNetVersion)-android;$(DotNetVersion)-ios;$(DotNetVersion)-maccatalyst</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OverrideTargetFramework)'!=''">$(OverrideTargetFramework)</TargetFrameworks>
+
+    <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Uno.WinUI" />
+    <PackageReference Include="Uno.WinUI.Lottie" />
+    <PackageReference Include="Uno.WinUI.DevServer" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.Resizetizer" />
+    <PackageReference Include="Uno.WinUI.Markup" />
+    <PackageReference Include="Uno.Extensions.Markup.Generators">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Uno.Material.WinUI.Markup" />
+    <PackageReference Include="Uno.Themes.WinUI.Markup" />
+    <PackageReference Include="Uno.Extensions.Configuration" />
+    <PackageReference Include="Uno.Extensions.Http" />
+    <PackageReference Include="Uno.Extensions.Http.Refit" />
+    <PackageReference Include="Uno.Extensions.Logging.WinUI" />
+    <PackageReference Include="Uno.Extensions.Logging.Serilog" />
+    <PackageReference Include="Uno.Extensions.Serialization.Http" />
+    <PackageReference Include="Uno.Extensions.Http.WinUI" />
+    <PackageReference Include="Uno.Extensions.Serialization.Refit" />
+    <PackageReference Include="Uno.Material.WinUI" />
+    <PackageReference Include="Uno.Dsp.Tasks" />
+    <PackageReference Include="Uno.Toolkit.WinUI.Material" />
+    <PackageReference Include="Uno.Toolkit.WinUI.Markup" />
+    <PackageReference Include="Uno.Extensions.Hosting.WinUI" />
+    <PackageReference Include="Uno.Extensions.Localization.WinUI" />
+    <PackageReference Include="Uno.Extensions.Navigation.Toolkit.WinUI" />
+    <PackageReference Include="Uno.Extensions.Navigation.WinUI" />
+    <PackageReference Include="Uno.Extensions.Navigation.WinUI.Markup" />
+    <PackageReference Include="Uno.Extensions.Reactive.WinUI" />
+    <PackageReference Include="Uno.Extensions.Reactive.WinUI.Markup" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <!-- Include all images by default - matches the __WindowsAppSdkDefaultImageIncludes property in the WindowsAppSDK -->
+    <Content Include="Assets\**;**/*.png;**/*.bmp;**/*.jpg;**/*.dds;**/*.tif;**/*.tga;**/*.gif" Exclude="bin\**;obj\**;**\*.svg" />
+    <Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <PRIResource Include="**\*.resw" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ConFoo2024.DataContracts\ConFoo2024.DataContracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UnoDspImportColors Include="Styles\*.zip" Generator="CSharp" />
+    <UnoImage Include="Assets\**\*.svg" />
+    <EmbeddedResource Include="appsettings.json" />
+    <EmbeddedResource Include="appsettings.*.json" DependentUpon="appsettings.json" />
+  </ItemGroup>
+</Project>
