@@ -21,6 +21,9 @@
     <UseInterpreter Condition="'$(Configuration)' == 'Debug' and $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) != 'maccatalyst'">True</UseInterpreter>
     <IsUnoHead>true</IsUnoHead>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <CodesignKey>Apple Development: lesterbotello@hotmail.com (NFDVED3E5Y)</CodesignKey>
+  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Uno.WinUI" />

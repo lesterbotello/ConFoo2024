@@ -1,3 +1,6 @@
+using ConFoo2024.Services.Dialog;
+using ConFoo2024.Services.Registration;
+
 namespace ConFoo2024;
 
 public class App : Application
@@ -5,7 +8,7 @@ public class App : Application
     protected Window? MainWindow { get; private set; }
     protected IHost? Host { get; private set; }
 
-    protected async override void OnLaunched(LaunchActivatedEventArgs args)
+    protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
         var builder = this.CreateBuilder(args)
             // Add navigation support for toolkit controls such as TabBar and NavigationView
@@ -67,8 +70,9 @@ public class App : Application
                     .AddRefitClient<IApiClient>(context))
                 .ConfigureServices((context, services) =>
                 {
-                    // TODO: Register your services
-                    //services.AddSingleton<IMyService, MyService>();
+                    services
+                        .AddSingleton<IRegistrationService, RegistrationService>()
+                        .AddSingleton<IDialogService, DialogService>();
                 })
                 .UseNavigation(ReactiveViewModelMappings.ViewModelMappings, RegisterRoutes)
             );
