@@ -8,9 +8,10 @@ public class RegistrationService : IRegistrationService
     {
         try
         {
-            var entities = await LoadEntitiesAsync();
-            entities?.Add(entity);
-            await SaveEntitiesAsync(entities ?? []);
+            var entities = await LoadEntitiesAsync(CancellationToken.None);
+            var newList = entities?.ToList();
+            newList?.Add(entity);
+            await SaveEntitiesAsync(newList.ToImmutableList() ?? []);
         }
         catch (Exception e)
         {
@@ -32,7 +33,7 @@ public class RegistrationService : IRegistrationService
         }
     }
     
-    private async Task SaveEntitiesAsync(List<Entity> entities)
+    private async Task SaveEntitiesAsync(IList<Entity> entities)
     {
         var options = new JsonSerializerOptions { WriteIndented = true };
         string json = JsonSerializer.Serialize(entities, options);
@@ -40,20 +41,24 @@ public class RegistrationService : IRegistrationService
         await FileIO.WriteTextAsync(file, json);
     }
     
-    public async Task<List<Entity>?> LoadEntitiesAsync()
+    public async ValueTask<ImmutableList<Entity>> LoadEntitiesAsync(CancellationToken ct)
     {
         try
         {
             var file = await GetFile(CreationCollisionOption.OpenIfExists);
             //await file.DeleteAsync();
             var json = await FileIO.ReadTextAsync(file);
-            return string.IsNullOrWhiteSpace(json) ? 
-                new List<Entity>() : 
-                JsonSerializer.Deserialize<List<Entity>>(json);
+            
+            var list = string.IsNullOrWhiteSpace(json) ? 
+                [] : 
+                JsonSerializer.Deserialize<List<Entity>>(json)?
+                    .ToImmutableList();
+            
+            return list;
         }
         catch
         {
-            return new List<Entity>();
+            return [];
         }
     }
 }

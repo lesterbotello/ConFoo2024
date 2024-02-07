@@ -68,7 +68,7 @@ public class App : Application
 #endif
                     .AddSingleton<IWeatherCache, WeatherCache>()
                     .AddRefitClient<IApiClient>(context))
-                .ConfigureServices((context, services) =>
+                .ConfigureServices((_, services) =>
                 {
                     services
                         .AddSingleton<IRegistrationService, RegistrationService>()
@@ -90,16 +90,18 @@ public class App : Application
         views.Register(
             new ViewMap(ViewModel: typeof(ShellModel)),
             new ViewMap<MainPage, MainModel>(),
-            new DataViewMap<SecondPage, SecondModel, Entity>()
+            new DataViewMap<SecondPage, SecondModel, Entity>(),
+            new ViewMap<AttendeesListPage, AttendeesListModel>()
         );
 
         routes.Register(
             new RouteMap("", View: views.FindByViewModel<ShellModel>(),
-                Nested: new RouteMap[]
-                {
+                Nested:
+                [
                     new RouteMap("Main", View: views.FindByViewModel<MainModel>()),
                     new RouteMap("Second", View: views.FindByViewModel<SecondModel>()),
-                }
+                    new RouteMap("AttendeesList", View: views.FindByViewModel<AttendeesListModel>())
+                ]
             )
         );
     }

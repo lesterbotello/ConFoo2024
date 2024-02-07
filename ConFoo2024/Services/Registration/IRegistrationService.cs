@@ -4,5 +4,5 @@ public interface IRegistrationService
 {
     Task RegisterAsync(Entity entity);
 
-    Task<List<Entity>?> LoadEntitiesAsync();
+    ValueTask<ImmutableList<Entity>> LoadEntitiesAsync(CancellationToken ct);
 }

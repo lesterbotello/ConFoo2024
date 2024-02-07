@@ -25,9 +25,13 @@ public sealed partial class MainPage : Page
                                 .Text(x => x.Bind(() => vm.Email).Mode(BindingMode.TwoWay))
                                 .PlaceholderText("Enter your email:"),
                             new Button()
-                                .Content("Go to Second Page")
+                                .Content("Proceed")
                                 .AutomationProperties(automationId: "SecondPageButton")
-                                .Command(() => vm.GoToSecond)
+                                .Command(() => vm.GoToSecond),
+                            new Button()
+                                .Content("View Attendees")
+                                .AutomationProperties(automationId: "SecondPageButton")
+                                .Command(() => vm.GoToAttendeesList)
                             )
                         )
                     )
