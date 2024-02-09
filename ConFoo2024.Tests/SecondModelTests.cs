@@ -1,3 +1,4 @@
+using AutoFixture;
 using ConFoo2024.Presentation;
 using ConFoo2024.Services.Dialog;
 using ConFoo2024.Services.Registration;
@@ -21,62 +22,74 @@ public class SecondModelTests
     [Test]
     public async Task FinishRegistration_WhenCalled_RegistersEntity()
     {
-        // Arrange:
-        var navigator = new MockNavigatorService();
-        var dialogService = new MockDialogService();
-        var registrationService = new MockRegistrationService();
-        var entity = new Entity("John Doe", "john.doe@abc.xyz");
-        var model = new SecondModel(entity, dialogService, registrationService, navigator);
-        
-        // Act:
-        await model.FinishRegistration();
-        
-        // Assert:
-        registrationService.RegisterAsyncCalled.Should().BeTrue();
+        // *************************************************************************************
+        // // Arrange:
+        // var navigator = new MockNavigatorService();
+        // var dialogService = new MockDialogService();
+        // var registrationService = new MockRegistrationService();
+        // var entity = new Entity("John Doe", "john.doe@abc.xyz");
+        // var model = new SecondModel(entity, dialogService, registrationService, navigator);
+        //
+        // // Act:
+        // await model.FinishRegistration();
+        //
+        // // Assert:
+        // registrationService.RegisterAsyncCalled.Should().BeTrue();
+        // *************************************************************************************
         
         // *************************************************************************************
         // Using NSubstitute to write the test:
-        // var navigator = Substitute.For<INavigator>();
-        //
-        // // Arrange
-        // var entity = new Entity("John Doe", "john.doe@abc.xyz");
-        // var model = new SecondModel(entity, _dialogService, _registrationService, navigator);
-        //
-        // // Act
-        // await model.FinishRegistration();
-        //
-        // // Assert
-        // await _registrationService.Received().RegisterAsync(entity);
+        var navigator = Substitute.For<INavigator>();
+        
+        // Arrange
+        var entity = new Fixture().Create<Entity>();
+        var model = new SecondModel(entity, _dialogService, _registrationService, navigator);
+        
+        // Act
+        await model.FinishRegistration();
+        
+        // Assert
+        await _registrationService.Received().RegisterAsync(entity);
         // *************************************************************************************
     }
 
     [Test]
     public async Task FinishRegistration_WhenCalled_ShowsDialog()
     {
-        // Act:
-        var navigator = new MockNavigatorService();
-        var dialogService = new MockDialogService();
-        var registrationService = new MockRegistrationService();
-        var entity = new Entity("John Doe", "john.doe@abc.xyz");
-        var model = new SecondModel(entity, dialogService, registrationService, navigator);
-        
-        // Act:
-        await model.FinishRegistration();
-        
-        // Assert:
-        dialogService.ShowMessageDialogAsyncCalled.Should().BeTrue();
-        
-        // var navigator = Substitute.For<INavigator>();
-        //
-        // // Arrange
+        // *************************************************************************************
+        // // Act:
+        // var navigator = new MockNavigatorService();
+        // var dialogService = new MockDialogService();
+        // var registrationService = new MockRegistrationService();
         // var entity = new Entity("John Doe", "john.doe@abc.xyz");
-        // var model = new SecondModel(entity, _dialogService, _registrationService, navigator);
-        // _registrationService.RegisterAsync(entity).Returns(Task.CompletedTask);
+        // var model = new SecondModel(entity, dialogService, registrationService, navigator);
         //
-        // // Act
+        // // Act:
         // await model.FinishRegistration();
         //
-        // // Assert
-        // await _dialogService.Received().ShowMessageDialogAsync(navigator, model, Arg.Any<string>(), Arg.Any<string>());
+        // // Assert:
+        // dialogService.ShowMessageDialogAsyncCalled.Should().BeTrue();
+        // *************************************************************************************
+        
+        // *************************************************************************************
+        //
+        // Arrange
+        var navigator = Substitute.For<INavigator>();
+        //var entity = new Fixture().Create<Entity>();
+        
+        var entity = new Fixture()
+            .Build<Entity>()
+            .With(x => x.Name, "John Doe")
+            .Create();
+        
+        var model = new SecondModel(entity, _dialogService, _registrationService, navigator);
+        _registrationService.RegisterAsync(entity).Returns(Task.CompletedTask);
+        
+        // Act
+        await model.FinishRegistration();
+        
+        // Assert
+        await _dialogService.Received().ShowMessageDialogAsync(navigator, model, Arg.Any<string>(), Arg.Any<string>());
+        // *************************************************************************************
     }
 }
