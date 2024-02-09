@@ -50,7 +50,11 @@ public sealed partial class AttendeesListPage : Page
     
     private static UIElement GetItemTemplate(Entity entity) => 
         new TextBlock()
-            .Text(() => entity.Name)
+            .Text(x => x
+                .Bind(() => entity.Name)
+                .Convert(name => $"Registered attendee: {name}")
+                .Mode(BindingMode.OneTime)
+            )
             .FontSize(16)
             .Foreground(Theme.Brushes.Primary.Default)
             .Padding(8);
