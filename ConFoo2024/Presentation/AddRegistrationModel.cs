@@ -5,14 +5,14 @@ using ConFoo2024.Services.Registration;
 namespace ConFoo2024.Presentation;
 
 [DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
-public partial class SecondModel
+public partial class AddRegistrationModel
 {
     private readonly IDialogService _dialogService;
     private readonly IRegistrationService _registrationService;
     private readonly Entity _entity;
     private readonly INavigator _navigator;
     
-    public SecondModel(Entity entity, IDialogService dialogService, IRegistrationService registrationService, INavigator navigator)
+    public AddRegistrationModel(Entity entity, IDialogService dialogService, IRegistrationService registrationService, INavigator navigator)
     {
         _entity = entity;
         _dialogService = dialogService;

@@ -7,7 +7,7 @@ using NSubstitute;
 
 namespace ConFoo2024.Tests;
 
-public class SecondModelTests
+public class AddRegistrationModelTests
 {
     private IDialogService _dialogService;
     private IRegistrationService _registrationService;
@@ -28,7 +28,7 @@ public class SecondModelTests
         // var dialogService = new MockDialogService();
         // var registrationService = new MockRegistrationService();
         // var entity = new Entity("John Doe", "john.doe@abc.xyz");
-        // var model = new SecondModel(entity, dialogService, registrationService, navigator);
+        // var model = new AddRegistrationModel(entity, dialogService, registrationService, navigator);
         //
         // // Act:
         // await model.FinishRegistration();
@@ -43,7 +43,7 @@ public class SecondModelTests
         
         // Arrange
         var entity = new Fixture().Create<Entity>();
-        var model = new SecondModel(entity, _dialogService, _registrationService, navigator);
+        var model = new AddRegistrationModel(entity, _dialogService, _registrationService, navigator);
         
         // Act
         await model.FinishRegistration();
@@ -62,7 +62,7 @@ public class SecondModelTests
         // var dialogService = new MockDialogService();
         // var registrationService = new MockRegistrationService();
         // var entity = new Entity("John Doe", "john.doe@abc.xyz");
-        // var model = new SecondModel(entity, dialogService, registrationService, navigator);
+        // var model = new AddRegistrationModel(entity, dialogService, registrationService, navigator);
         //
         // // Act:
         // await model.FinishRegistration();
@@ -82,7 +82,7 @@ public class SecondModelTests
             .With(x => x.Name, "John Doe")
             .Create();
         
-        var model = new SecondModel(entity, _dialogService, _registrationService, navigator);
+        var model = new AddRegistrationModel(entity, _dialogService, _registrationService, navigator);
         _registrationService.RegisterAsync(entity).Returns(Task.CompletedTask);
         
         // Act

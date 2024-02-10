@@ -1,10 +1,10 @@
 ﻿namespace ConFoo2024.Presentation;
 
-public sealed partial class SecondPage : Page
+public sealed partial class AddRegistrationPage : Page
 {
-    public SecondPage()
+    public AddRegistrationPage()
     {
-        this.DataContext<BindableSecondModel>((page, vm) => page
+        this.DataContext<BindableAddRegistrationModel>((page, vm) => page
             .Background(Theme.Brushes.Background.Default)
             .Content(new Grid()
                 .SafeArea(SafeArea.InsetMask.All)

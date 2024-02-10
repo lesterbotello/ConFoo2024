@@ -25,7 +25,7 @@ public partial record MainModel
     {
         var name = await Name;
         var email = await Email;
-        await _navigator.NavigateViewModelAsync<SecondModel>(this, data: new Entity(name!, email!));
+        await _navigator.NavigateViewModelAsync<AddRegistrationModel>(this, data: new Entity(name!, email!));
     }
     
     public async Task GoToAttendeesList()

@@ -90,7 +90,7 @@ public class App : Application
         views.Register(
             new ViewMap(ViewModel: typeof(ShellModel)),
             new ViewMap<MainPage, MainModel>(),
-            new DataViewMap<SecondPage, SecondModel, Entity>(),
+            new DataViewMap<AddRegistrationPage, AddRegistrationModel, Entity>(),
             new ViewMap<AttendeesListPage, AttendeesListModel>()
         );
 
@@ -99,7 +99,7 @@ public class App : Application
                 Nested:
                 [
                     new RouteMap("Main", View: views.FindByViewModel<MainModel>()),
-                    new RouteMap("Second", View: views.FindByViewModel<SecondModel>()),
+                    new RouteMap("Second", View: views.FindByViewModel<AddRegistrationModel>()),
                     new RouteMap("AttendeesList", View: views.FindByViewModel<AttendeesListModel>())
                 ]
             )
