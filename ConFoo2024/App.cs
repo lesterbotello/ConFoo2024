@@ -1,5 +1,6 @@
 using ConFoo2024.Services.Dialog;
 using ConFoo2024.Services.Registration;
+using ConFoo2024.Services.Validation;
 
 namespace ConFoo2024;
 
@@ -72,6 +73,7 @@ public class App : Application
                 {
                     services
                         .AddSingleton<IRegistrationService, RegistrationService>()
+                        .AddSingleton<IValidationService, ValidationService>()
                         .AddSingleton<IDialogService, DialogService>();
                 })
                 .UseNavigation(ReactiveViewModelMappings.ViewModelMappings, RegisterRoutes)

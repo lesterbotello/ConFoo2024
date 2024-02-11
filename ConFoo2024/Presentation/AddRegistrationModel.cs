@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using ConFoo2024.Services.Dialog;
 using ConFoo2024.Services.Registration;
+using ConFoo2024.Services.Validation;
 
 namespace ConFoo2024.Presentation;
 
@@ -11,13 +12,19 @@ public partial class AddRegistrationModel
     private readonly IRegistrationService _registrationService;
     private readonly Entity _entity;
     private readonly INavigator _navigator;
-    
-    public AddRegistrationModel(Entity entity, IDialogService dialogService, IRegistrationService registrationService, INavigator navigator)
+    private readonly IValidationService _validationService;
+
+    public AddRegistrationModel(Entity entity, 
+        IDialogService dialogService, 
+        IRegistrationService registrationService, 
+        INavigator navigator,
+        IValidationService validationService)
     {
         _entity = entity;
         _dialogService = dialogService;
         _registrationService = registrationService;
         _navigator = navigator;
+        _validationService = validationService;
     }
     
     public string ConfirmationLabel => "Please confirm the information of your registration:";
@@ -28,6 +35,13 @@ public partial class AddRegistrationModel
 
     public async Task FinishRegistration()
     {
+        if (!_validationService.IsEmailValid(_entity.Email))
+        {
+            await _dialogService.ShowMessageDialogAsync(_navigator, this, title: "Invalid email", content: "The email you entered is not valid.");
+            
+            return;
+        }
+        
         await _registrationService.RegisterAsync(_entity);
         
         await _dialogService.ShowMessageDialogAsync(_navigator, this, title: "Registration confirmed", content: "Your registration has been confirmed, tickets on the way.");
