@@ -21,7 +21,7 @@ public class AddRegistrationModelTests
         _validationService = Substitute.For<IValidationService>();
     }
 
-    [Test]
+    [Test(Description = "When FinishRegistration is called, RegisterAsync should be called.")]
     public async Task FinishRegistration_WhenCalled_RegistersEntity()
     {
         var navigator = Substitute.For<INavigator>();
@@ -29,39 +29,41 @@ public class AddRegistrationModelTests
         
         // Arrange
         var entity = new Fixture().Create<Entity>();
-        var model = new AddRegistrationModel(entity, _dialogService, _registrationService, navigator, _validationService);
+        var sut = new AddRegistrationModel(entity, _dialogService, _registrationService, navigator, _validationService);
         
         // Act
-        await model.FinishRegistration();
+        await sut.FinishRegistration();
         
         // Assert
         await _registrationService.Received().RegisterAsync(entity);
     }
 
-    [Test]
+    [Test(Description = "When FinishRegistration is called, a dialog should be displayed.")]
     public async Task FinishRegistration_WhenCalled_ShowsDialog()
     {
         // Arrange
         var navigator = Substitute.For<INavigator>();
         _validationService.IsEmailValid(Arg.Any<string>()).Returns(true);
-        //var entity = new Fixture().Create<Entity>();
+        var entity = new Fixture().Create<Entity>();
         
-        var entity = new Fixture()
-            .Build<Entity>()
-            .With(x => x.Name, "John Doe")
-            .Create();
-        
-        var model = new AddRegistrationModel(entity, _dialogService, _registrationService, navigator, _validationService);
+#region A better way to create the entity with explicit values        
+        // var entity = new Fixture()
+        //     .Build<Entity>()
+        //     .With(x => x.Name, "John Doe")
+        //     .Create();
+#endregion
+
+        var sut = new AddRegistrationModel(entity, _dialogService, _registrationService, navigator, _validationService);
         _registrationService.RegisterAsync(entity).Returns(Task.CompletedTask);
         
         // Act
-        await model.FinishRegistration();
+        await sut.FinishRegistration();
         
         // Assert
-        await _dialogService.Received().ShowMessageDialogAsync(navigator, model, Arg.Any<string>(), Arg.Any<string>());
+        await _dialogService.Received().ShowMessageDialogAsync(navigator, sut, Arg.Any<string>(), Arg.Any<string>());
     }
     
-    [Test]
+    [Test(Description = "When email is invalid, FinishRegistration should NOT register entity.")]
     public async Task FinishRegistration_WhenEmailInvalid_ShouldNotRegisterEntity()
     {
         var navigator = Substitute.For<INavigator>();
@@ -73,16 +75,16 @@ public class AddRegistrationModelTests
             .With(x => x.Email, "john.doe@abc")
             .Create();
         
-        var model = new AddRegistrationModel(entity, _dialogService, _registrationService, navigator, _validationService);
+        var sut = new AddRegistrationModel(entity, _dialogService, _registrationService, navigator, _validationService);
         
         // Act
-        await model.FinishRegistration();
+        await sut.FinishRegistration();
         
         // Assert
         await _registrationService.DidNotReceive().RegisterAsync(entity);
     }
 
-    [Test]
+    [Test(Description = "When email is valid, FinishRegistration should register entity.")]
     public async Task FinishRegistration_WhenEmailValid_ShouldRegisterEntity()
     {
         // Arrange
@@ -94,10 +96,10 @@ public class AddRegistrationModelTests
             .With(x => x.Email, "john.doe@abc.com")
             .Create();
         
-        var model = new AddRegistrationModel(entity, _dialogService, _registrationService, navigator, _validationService);
+        var sut = new AddRegistrationModel(entity, _dialogService, _registrationService, navigator, _validationService);
         
         // Act
-        await model.FinishRegistration();
+        await sut.FinishRegistration();
         
         // Assert
         await _registrationService.Received().RegisterAsync(entity);

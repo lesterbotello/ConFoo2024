@@ -12,7 +12,8 @@ public sealed partial class AttendeesListPage : Page
                 .SafeArea(SafeArea.InsetMask.All)
                 .RowDefinitions("Auto,*")
                 .Children(
-                    new NavigationBar().Content("Attendees"),
+                    new NavigationBar()
+                        .Content("Attendees"),
                     new AutoLayout()
                         .Grid(row: 1)
                         .HorizontalAlignment(HorizontalAlignment.Center)

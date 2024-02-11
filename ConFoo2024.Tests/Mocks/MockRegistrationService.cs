@@ -5,8 +5,16 @@ namespace ConFoo2024.Tests.Mocks;
 
 public class MockRegistrationService : IRegistrationService
 {
+    private readonly List<Entity> _entities =
+    [
+        new Entity("John Doe", "john.doe@abc.xyz"),
+        new Entity("Jane Doe", "jane.doe@xyz.abc")
+    ];
+
     public Task RegisterAsync(Entity entity)
     {
+        _entities.Add(entity);
+        
         RegisterAsyncCalled = true;
         return Task.CompletedTask;
     }
@@ -15,8 +23,7 @@ public class MockRegistrationService : IRegistrationService
     {
         LoadEntitiesAsyncCalled = true;
         
-        // TODO: Return a list of entities with actual values
-        return new ValueTask<ImmutableList<Entity>>();
+        return ValueTask.FromResult(_entities.ToImmutableList());
     }
     
     // Mock support below:

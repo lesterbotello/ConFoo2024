@@ -15,10 +15,10 @@ public class AddRegistrationModelTestsWithMocks
         var registrationService = new MockRegistrationService();
         var validationService = new ValidationService();
         var entity = new Entity("John Doe", "john.doe@abc.xyz");
-        var model = new AddRegistrationModel(entity, dialogService, registrationService, navigator, validationService);
+        var sut = new AddRegistrationModel(entity, dialogService, registrationService, navigator, validationService);
         
         // Act:
-        await model.FinishRegistration();
+        await sut.FinishRegistration();
         
         // Assert:
         registrationService.RegisterAsyncCalled.Should().BeTrue();
@@ -33,10 +33,10 @@ public class AddRegistrationModelTestsWithMocks
         var registrationService = new MockRegistrationService();
         var validationService = new ValidationService();
         var entity = new Entity("John Doe", "john.doe@abc.xyz");
-        var model = new AddRegistrationModel(entity, dialogService, registrationService, navigator, validationService);
+        var sut = new AddRegistrationModel(entity, dialogService, registrationService, navigator, validationService);
         
         // Act:
-        await model.FinishRegistration();
+        await sut.FinishRegistration();
         
         // Assert:
         dialogService.ShowMessageDialogAsyncCalled.Should().BeTrue();
@@ -51,10 +51,10 @@ public class AddRegistrationModelTestsWithMocks
         var registrationService = new MockRegistrationService();
         var validationService = new ValidationService();
         var entity = new Entity("John Doe", "john.doe@abc");
-        var model = new AddRegistrationModel(entity, dialogService, registrationService, navigator, validationService);
+        var sut = new AddRegistrationModel(entity, dialogService, registrationService, navigator, validationService);
         
         // Act:
-        await model.FinishRegistration();
+        await sut.FinishRegistration();
         
         // Assert:
         registrationService.RegisterAsyncCalled.Should().BeFalse();
@@ -69,10 +69,10 @@ public class AddRegistrationModelTestsWithMocks
         var registrationService = new MockRegistrationService();
         var validationService = new ValidationService();
         var entity = new Entity("John Doe", "john.doe@abc.com");
-        var model = new AddRegistrationModel(entity, dialogService, registrationService, navigator, validationService);
+        var sut = new AddRegistrationModel(entity, dialogService, registrationService, navigator, validationService);
         
         // Act:
-        await model.FinishRegistration();
+        await sut.FinishRegistration();
         
         // Assert:
         registrationService.RegisterAsyncCalled.Should().BeTrue();
