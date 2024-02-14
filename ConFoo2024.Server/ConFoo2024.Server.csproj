@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ConFoo2024.Wasm\ConFoo2024.Wasm.csproj" />
-    <ProjectReference Include="..\ConFoo2024.DataContracts\ConFoo2024.DataContracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>

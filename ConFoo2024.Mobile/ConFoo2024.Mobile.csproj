@@ -93,7 +93,6 @@
   </Choose>
   <ItemGroup>
     <ProjectReference Include="..\ConFoo2024\ConFoo2024.csproj" />
-    <ProjectReference Include="..\ConFoo2024.DataContracts\ConFoo2024.DataContracts.csproj" />
   </ItemGroup>
   <Import Project="..\ConFoo2024.Shared\base.props" />
 

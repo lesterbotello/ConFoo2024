@@ -53,10 +53,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ConFoo2024.DataContracts\ConFoo2024.DataContracts.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <UnoDspImportColors Include="Styles\*.zip" Generator="CSharp" />
     <UnoImage Include="Assets\**\*.svg" />
     <EmbeddedResource Include="appsettings.json" />
