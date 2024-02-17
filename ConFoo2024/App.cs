@@ -1,4 +1,5 @@
 using ConFoo2024.Services.Dialog;
+using ConFoo2024.Services.File;
 using ConFoo2024.Services.Navigation;
 using ConFoo2024.Services.Registration;
 using ConFoo2024.Services.Validation;
@@ -76,7 +77,8 @@ public class App : Application
                         .AddSingleton<IRegistrationService, RegistrationService>()
                         .AddSingleton<IValidationService, ValidationService>()
                         .AddSingleton<IDialogService, DialogService>()
-                        .AddSingleton<INavigationService, NavigationService>();
+                        .AddSingleton<INavigationService, NavigationService>()
+                        .AddSingleton<IFileService, FileService>();
                 })
                 .UseNavigation(ReactiveViewModelMappings.ViewModelMappings, RegisterRoutes)
             );

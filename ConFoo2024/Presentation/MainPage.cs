@@ -1,4 +1,6 @@
-﻿namespace ConFoo2024.Presentation;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace ConFoo2024.Presentation;
 
 public sealed partial class MainPage : Page
 {
