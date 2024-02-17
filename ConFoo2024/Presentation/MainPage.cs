@@ -33,7 +33,7 @@ public sealed partial class MainPage : Page
                             new Button()
                                 .Content("Proceed")
                                 .AutomationProperties(automationId: "AddRegistrationButton")
-                                .Command(() => vm.GoToSecond),
+                                .Command(() => vm.GoToRegistration),
                             new Button()
                                 .Content("View Attendees")
                                 .AutomationProperties(automationId: "ViewAttendeesButton")

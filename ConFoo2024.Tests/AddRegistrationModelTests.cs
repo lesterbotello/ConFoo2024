@@ -7,6 +7,7 @@ using NSubstitute;
 
 namespace ConFoo2024.Tests;
 
+[TestFixture]
 public class AddRegistrationModelTests
 {
     private IDialogService _dialogService;

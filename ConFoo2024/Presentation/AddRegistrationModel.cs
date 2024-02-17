@@ -5,7 +5,6 @@ using ConFoo2024.Services.Validation;
 
 namespace ConFoo2024.Presentation;
 
-[DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
 public partial class AddRegistrationModel
 {
     private readonly IDialogService _dialogService;
@@ -45,10 +44,5 @@ public partial class AddRegistrationModel
         await _registrationService.RegisterAsync(_entity);
         
         await _dialogService.ShowMessageDialogAsync(_navigator, this, title: "Registration confirmed", content: "Your registration has been confirmed, tickets on the way.");
-    }
-
-    private string GetDebuggerDisplay()
-    {
-        return ToString();
     }
 }

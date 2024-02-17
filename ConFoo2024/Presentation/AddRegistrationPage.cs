@@ -1,5 +1,8 @@
-﻿namespace ConFoo2024.Presentation;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace ConFoo2024.Presentation;
+
+[ExcludeFromCodeCoverage]
 public sealed partial class AddRegistrationPage : Page
 {
     public AddRegistrationPage()
