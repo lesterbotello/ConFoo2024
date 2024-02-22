@@ -1,5 +1,6 @@
 namespace ConFoo2024;
 
+//[ExcludeFromCodeCoverage]
 public sealed class AppResources : ResourceDictionary
 {
     public AppResources()

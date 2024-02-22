@@ -1,6 +1,6 @@
 ﻿namespace ConFoo2024.Presentation;
 
-[ExcludeFromCodeCoverage]
+//[ExcludeFromCodeCoverage]
 public sealed partial class Shell : UserControl, IContentControlProvider
 {
     public Shell()

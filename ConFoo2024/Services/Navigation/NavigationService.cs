@@ -1,6 +1,6 @@
 namespace ConFoo2024.Services.Navigation;
 
-[ExcludeFromCodeCoverage]
+//[ExcludeFromCodeCoverage]
 public class NavigationService : INavigationService
 {
     public Task NavigateViewModelAsync<TViewModel>(INavigator navigator, object sender, object? data = null) where TViewModel : class

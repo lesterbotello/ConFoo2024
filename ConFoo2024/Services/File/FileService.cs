@@ -2,7 +2,7 @@ using System.Text.Json;
 
 namespace ConFoo2024.Services.File;
 
-[ExcludeFromCodeCoverage]
+//[ExcludeFromCodeCoverage]
 public class FileService : IFileService
 {
     public async Task<ImmutableList<Entity>> LoadEntitiesAsync(CancellationToken ct)

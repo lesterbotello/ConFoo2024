@@ -6,6 +6,7 @@ using ConFoo2024.Services.Validation;
 
 namespace ConFoo2024;
 
+//[ExcludeFromCodeCoverage]
 public class App : Application
 {
     protected Window? MainWindow { get; private set; }
