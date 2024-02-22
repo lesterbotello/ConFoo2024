@@ -2,6 +2,7 @@
 
 namespace ConFoo2024.Presentation;
 
+[ExcludeFromCodeCoverage]
 public sealed partial class MainPage : Page
 {
     public MainPage()

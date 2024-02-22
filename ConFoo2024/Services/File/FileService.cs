@@ -2,6 +2,7 @@ using System.Text.Json;
 
 namespace ConFoo2024.Services.File;
 
+[ExcludeFromCodeCoverage]
 public class FileService : IFileService
 {
     public async Task<ImmutableList<Entity>> LoadEntitiesAsync(CancellationToken ct)
@@ -34,7 +35,7 @@ public class FileService : IFileService
     public async Task SaveEntitiesAsync(IList<Entity> entities)
     {
         var options = new JsonSerializerOptions { WriteIndented = true };
-        string json = JsonSerializer.Serialize(entities, options);
+        var json = JsonSerializer.Serialize(entities, options);
         var file = await GetFile(CreationCollisionOption.ReplaceExisting);
         await FileIO.WriteTextAsync(file, json);
     }

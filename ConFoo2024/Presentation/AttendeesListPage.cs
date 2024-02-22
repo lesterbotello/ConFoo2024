@@ -2,6 +2,7 @@ using Windows.UI.Text;
 
 namespace ConFoo2024.Presentation;
 
+[ExcludeFromCodeCoverage]
 public sealed partial class AttendeesListPage : Page
 {
     public AttendeesListPage()

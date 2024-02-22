@@ -25,10 +25,17 @@ public class RegistrationServiceTests
         // Arrange
         var fixture = new Fixture();
         var newEntity = fixture.Create<Entity>();
-        var initialEntities = fixture.CreateMany<Entity>(4).ToImmutableList();
+        
+        var initialEntities = fixture
+            .CreateMany<Entity>(4)
+            .ToImmutableList();
+        
         _fileService.LoadEntitiesAsync(Arg.Any<CancellationToken>())
             .Returns(initialEntities);
 
+        // Because for this test, we're only interested in the entities that are saved, we'll replace the functionality
+        // of the SaveEntitiesAsync method on the file service with a custom implementation that just captures the entities
+        // which we'll evaluate later...
         IImmutableList<Entity> savedEntities = null;
         _fileService.SaveEntitiesAsync(Arg.Do<IList<Entity>>(entities => savedEntities = entities.ToImmutableList()))
             .Returns(Task.CompletedTask);
@@ -39,5 +46,22 @@ public class RegistrationServiceTests
         // Assert
         Assert.Contains(newEntity, savedEntities?.ToList());
         Assert.That(savedEntities?.Count, Is.EqualTo(5));
+    }
+    
+    [Test]
+    public async Task LoadEntitiesAsync_WhenCalled_ReturnsEntities()
+    {
+        // Arrange
+        var fixture = new Fixture();
+        var entities = fixture.CreateMany<Entity>(4).ToImmutableList();
+        
+        _fileService.LoadEntitiesAsync(Arg.Any<CancellationToken>())
+            .Returns(entities);
+
+        // Act
+        var result = await _registrationService.LoadEntitiesAsync(CancellationToken.None);
+
+        // Assert
+        Assert.That(result, Is.EqualTo(entities));
     }
 }
