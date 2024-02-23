@@ -3,6 +3,7 @@ using Uno.Extensions.Markup;
 
 namespace ConFoo2024.Styles;
 
+//[ExcludeFromCodeCoverage]
 public sealed partial class ColorPaletteOverride : ResourceDictionary
 {
 	public ColorPaletteOverride()

@@ -1,5 +1,6 @@
 namespace ConFoo2024.Styles;
 
+//[ExcludeFromCodeCoverage]
 public sealed class MaterialFontsOverride : ResourceDictionary
 {
     public MaterialFontsOverride()

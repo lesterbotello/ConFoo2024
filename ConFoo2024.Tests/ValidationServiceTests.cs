@@ -9,8 +9,10 @@ public class ValidationServiceTests
     [TestCase("john.doe@abc", false)]
     public void IsEmailValid_ShouldValidateEmail(string email, bool expectedResult)
     {
-        var validationService = new ValidationService();
-        var result = validationService.IsEmailValid(email);
+        // Because we want to validate the functionality of the service itself,
+        // we don't want to mock it, we rather add an instance to the concretion.
+        var sut = new ValidationService();
+        var result = sut.IsEmailValid(email);
         
         Assert.AreEqual(expectedResult, result);
     }
